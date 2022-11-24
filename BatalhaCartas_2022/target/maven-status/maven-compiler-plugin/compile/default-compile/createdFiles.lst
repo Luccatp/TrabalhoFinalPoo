@@ -1,4 +1,5 @@
 GameEvent.class
+Type.class
 GameWindow.class
 CardDeck.class
 CardView.class
