@@ -10,14 +10,16 @@ enum Type {
 public class Card extends Observable {
 	private String id;
 	private String imageId;
-	private int value;
+	private int attack;
+	private int health;
 	private Type type;
 	private boolean faceUp;
 
-	public Card(String anId, String anImageId, int val, Type type) {
+	public Card(String anId, String anImageId, int attack, int health, Type type) {
 		id = anId;
 		imageId = anImageId;
-		value = val;
+		this.attack = attack;
+		this.health = health;
 		this.type = type;
 		faceUp = true;
 	}
@@ -30,8 +32,20 @@ public class Card extends Observable {
 		return (imageId);
 	}
 
-	public int getValue() {
-		return (value);
+	public void setImagem(String imageId) {
+		this.imageId = imageId;
+	}
+
+	public int getAttack() {
+		return (attack);
+	}
+
+	public int getHealth() {
+		return (health);
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 	public Type getType() {

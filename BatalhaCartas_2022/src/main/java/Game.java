@@ -46,7 +46,7 @@ public class Game extends Observable {
 	public void play(CardDeck deckAcionado) {
 		GameEvent gameEvent = null;
 
-		if (player == 3) {
+		if (player == 4) {
 			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.MUSTCLEAN, "");
 			setChanged();
 			notifyObservers((Object) gameEvent);
@@ -80,7 +80,11 @@ public class Game extends Observable {
 						||
 						deckJ1.getSelectedCard().getType().equals(Type.PLANT)
 								&& deckJ2.getSelectedCard().getType().equals(Type.WATER)) {
+
+					deckJ2.getSelectedCard()
+							.setHealth(0);
 					ptsJ1++;
+
 				} else if (deckJ2.getSelectedCard().getType().equals(Type.FIRE)
 						&& deckJ1.getSelectedCard().getType().equals(Type.PLANT)
 						||
@@ -89,11 +93,34 @@ public class Game extends Observable {
 						||
 						deckJ2.getSelectedCard().getType().equals(Type.PLANT)
 								&& deckJ1.getSelectedCard().getType().equals(Type.WATER)) {
+
+					deckJ1.getSelectedCard()
+							.setHealth(0);
+
 					ptsJ2++;
-				} else if (deckJ1.getSelectedCard().getValue() > deckJ2.getSelectedCard().getValue()) {
-					ptsJ1++;
-				} else if (deckJ1.getSelectedCard().getValue() < deckJ2.getSelectedCard().getValue()) {
-					ptsJ2++;
+
+				} else {
+
+					deckJ1.getSelectedCard()
+							.setHealth(deckJ1.getSelectedCard().getHealth() - deckJ2.getSelectedCard().getAttack());
+
+					deckJ2.getSelectedCard()
+							.setHealth(deckJ2.getSelectedCard().getHealth() - deckJ1.getSelectedCard().getAttack());
+
+					String imgName1 = deckJ1.getSelectedCard().getImageId();
+					imgName1 = imgName1.substring(0, imgName1.length() - 1) + deckJ1.getSelectedCard().getHealth();
+					deckJ1.getSelectedCard().setImagem(imgName1);
+
+					String imgName2 = deckJ2.getSelectedCard().getImageId();
+					imgName2 = imgName2.substring(0, imgName2.length() - 1) + deckJ2.getSelectedCard().getHealth();
+					deckJ2.getSelectedCard().setImagem(imgName2);
+
+					if (deckJ1.getSelectedCard().getHealth() <= 0) {
+						ptsJ2++;
+					}
+					if (deckJ2.getSelectedCard().getHealth() <= 0) {
+						ptsJ1++;
+					}
 				}
 				setChanged();
 				notifyObservers((Object) gameEvent);
@@ -117,8 +144,16 @@ public class Game extends Observable {
 			notifyObservers((Object) gameEvent);
 			// return;
 		}
-		deckJ1.removeSel();
-		deckJ2.removeSel();
+		if (deckJ1.getSelectedCard().getHealth() <= 0) {
+			deckJ1.removeSel();
+		} else {
+			deckJ1.getSelectedCard().flip();
+		}
+		if (deckJ2.getSelectedCard().getHealth() <= 0) {
+			deckJ2.removeSel();
+		} else {
+			deckJ2.getSelectedCard().flip();
+		}
 		nextPlayer();
 	}
 }
