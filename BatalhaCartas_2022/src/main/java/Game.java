@@ -74,21 +74,23 @@ public class Game extends Observable {
 				// Verifica quem ganhou a rodada
 				if (deckJ1.getSelectedCard().getType().equals(Type.FIRE)
 						&& deckJ2.getSelectedCard().getType().equals(Type.PLANT)
-						|| deckJ1.getSelectedCard().getType().equals(Type.WATER)
+						||
+						deckJ1.getSelectedCard().getType().equals(Type.WATER)
 								&& deckJ2.getSelectedCard().getType().equals(Type.FIRE)
 						||
 						deckJ1.getSelectedCard().getType().equals(Type.PLANT)
 								&& deckJ2.getSelectedCard().getType().equals(Type.WATER)) {
 					ptsJ1++;
 				} else if (deckJ2.getSelectedCard().getType().equals(Type.FIRE)
-						&& deckJ2.getSelectedCard().getType().equals(Type.PLANT)
-						|| deckJ2.getSelectedCard().getType().equals(Type.WATER)
-								&& deckJ2.getSelectedCard().getType().equals(Type.FIRE)
+						&& deckJ1.getSelectedCard().getType().equals(Type.PLANT)
+						||
+						deckJ2.getSelectedCard().getType().equals(Type.WATER)
+								&& deckJ1.getSelectedCard().getType().equals(Type.FIRE)
 						||
 						deckJ2.getSelectedCard().getType().equals(Type.PLANT)
-								&& deckJ2.getSelectedCard().getType().equals(Type.WATER)) {
+								&& deckJ1.getSelectedCard().getType().equals(Type.WATER)) {
 					ptsJ2++;
-				} else if (deckJ2.getSelectedCard().getValue() > deckJ2.getSelectedCard().getValue()) {
+				} else if (deckJ1.getSelectedCard().getValue() > deckJ2.getSelectedCard().getValue()) {
 					ptsJ1++;
 				} else if (deckJ1.getSelectedCard().getValue() < deckJ2.getSelectedCard().getValue()) {
 					ptsJ2++;

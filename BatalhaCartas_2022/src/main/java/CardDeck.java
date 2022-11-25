@@ -12,22 +12,48 @@ public class CardDeck extends Observable {
 		Random r = new Random();
 		Type type;
 		for (int i = 0; i < NCARDS; i++) {
-			int n = r.nextInt(10) + 1;
-			int randomType = r.nextInt(3) + 1;
-			if (randomType == 1) {
+			int randomType = r.nextInt(9) + 1;
+			int value;
+			switch (randomType) {
+				case 1:
+					value = 1;
+					break;
+				case 2:
+					value = 2;
+					break;
+				case 3:
+					value = 3;
+					break;
+				case 4:
+					value = 1;
+					break;
+				case 5:
+					value = 2;
+					break;
+				case 6:
+					value = 3;
+					break;
+				case 7:
+					value = 1;
+					break;
+				case 8:
+					value = 2;
+					break;
+				case 9:
+					value = 3;
+					break;
+				default:
+					value = 0;
+					break;
+			}
+			if (randomType <= 3 && randomType >= 1) {
 				type = Type.FIRE;
-			} else if (randomType == 2) {
-				type = Type.PLANT;
-			} else if (randomType == 3) {
-				type = Type.WATER;
-			} else if (randomType == 4) {
-				type = Type.PLANT;
-			} else if (randomType == 5) {
+			} else if (randomType > 3 && randomType <= 6) {
 				type = Type.PLANT;
 			} else {
-				type = Type.PLANT;
+				type = Type.WATER;
 			}
-			Card c = new Card("C" + n, "img" + n, n, type);
+			Card c = new Card("C" + randomType, "img" + randomType, value, type);
 			c.flip();
 			cartas.add(c);
 		}
