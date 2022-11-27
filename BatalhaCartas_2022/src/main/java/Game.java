@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javafx.stage.Stage;
+
 public class Game extends Observable {
 	private static Game game = new Game();
 	private int ptsJ1, ptsJ2;
@@ -21,9 +23,18 @@ public class Game extends Observable {
 	}
 
 	private void nextPlayer() {
+		GameEvent gameEvent = null;
 		player++;
-		if (player == 4) {
+		if (player <= 2) {
+			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.TURN, Integer.toString(game.player));
+			setChanged();
+			notifyObservers((Object) gameEvent);
+		} else if (player == 4) {
 			player = 1;
+		} else if (player == 3) {
+			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.MUSTCLEAN, "");
+			setChanged();
+			notifyObservers((Object) gameEvent);
 		}
 	}
 
@@ -61,6 +72,7 @@ public class Game extends Observable {
 				// Vira a carta
 				deckJ1.getSelectedCard().flip();
 				// Proximo jogador
+
 				nextPlayer();
 			}
 		} else if (deckAcionado == deckJ2) {
@@ -138,7 +150,7 @@ public class Game extends Observable {
 			return;
 		}
 		jogadas--;
-		if (jogadas == 0) {
+		if (deckJ1.getNumberOfCards() == 1 | deckJ2.getNumberOfCards() == 1) {
 			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.ENDGAME, "");
 			setChanged();
 			notifyObservers((Object) gameEvent);
