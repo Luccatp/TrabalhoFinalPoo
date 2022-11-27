@@ -212,9 +212,12 @@ public class CardDeck extends Observable {
 				type = Type.PLANT;
 			} else if (randomType > 6 && randomType <= 9) {
 				type = Type.WATER;
-			} else {
-				type = null;
+			} else if (randomType > 9 && randomType <= 12) {
+				type = Type.AIR;
+		    } else if (randomType > 12 && randomType <= 15){
+				type = Type.ROCK;
 			}
+			
 			Card c = new Card("C" + randomType, "img" + stringValor, attack, health, type);
 			c.flip();
 			cartas.add(c);

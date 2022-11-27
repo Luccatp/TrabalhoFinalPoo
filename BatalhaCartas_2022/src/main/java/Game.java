@@ -1,7 +1,5 @@
 import java.util.*;
 
-import javafx.stage.Stage;
-
 public class Game extends Observable {
 	private static Game game = new Game();
 	private int ptsJ1, ptsJ2;
@@ -23,18 +21,9 @@ public class Game extends Observable {
 	}
 
 	private void nextPlayer() {
-		GameEvent gameEvent = null;
 		player++;
-		if (player <= 2) {
-			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.TURN, Integer.toString(game.player));
-			setChanged();
-			notifyObservers((Object) gameEvent);
-		} else if (player == 4) {
+		if (player == 4) {
 			player = 1;
-		} else if (player == 3) {
-			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.MUSTCLEAN, "");
-			setChanged();
-			notifyObservers((Object) gameEvent);
 		}
 	}
 
@@ -72,7 +61,6 @@ public class Game extends Observable {
 				// Vira a carta
 				deckJ1.getSelectedCard().flip();
 				// Proximo jogador
-
 				nextPlayer();
 			}
 		} else if (deckAcionado == deckJ2) {
@@ -110,8 +98,15 @@ public class Game extends Observable {
 							.setHealth(0);
 
 					ptsJ2++;
+				}else if(deckJ1.getSelectedCard().getType().equals(Type.AIR) || deckJ1.getSelectedCard().getType().equals(Type.ROCK) || deckJ2.getSelectedCard().getType().equals(Type.AIR) || deckJ2.getSelectedCard().getType().equals(Type.ROCK)){
 
-				} else {
+									deckJ1.getSelectedCard()
+									.setHealth(deckJ1.getSelectedCard().getHealth() - deckJ2.getSelectedCard().getAttack());
+				
+									deckJ2.getSelectedCard()
+									.setHealth(deckJ2.getSelectedCard().getHealth() - deckJ1.getSelectedCard().getAttack());
+									}
+				 else {
 
 					deckJ1.getSelectedCard()
 							.setHealth(deckJ1.getSelectedCard().getHealth() - deckJ2.getSelectedCard().getAttack());
@@ -136,7 +131,7 @@ public class Game extends Observable {
 				}
 				setChanged();
 				notifyObservers((Object) gameEvent);
-				// Próximo jogador
+				// PrÃ³ximo jogador
 				nextPlayer();
 			}
 		}
@@ -150,7 +145,7 @@ public class Game extends Observable {
 			return;
 		}
 		jogadas--;
-		if (deckJ1.getNumberOfCards() == 1 | deckJ2.getNumberOfCards() == 1) {
+		if (jogadas == 0) {
 			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.ENDGAME, "");
 			setChanged();
 			notifyObservers((Object) gameEvent);
@@ -165,6 +160,15 @@ public class Game extends Observable {
 			deckJ2.removeSel();
 		} else {
 			deckJ2.getSelectedCard().flip();
+		}
+		nextPlayer();
+	}
+
+	public void habilidadeEspecial(){
+		
+		
+		if (deckJ1.getSelectedCard().getHealth() == 1){
+			deckJ1.getSelectedCard().setHealth(3);
 		}
 		nextPlayer();
 	}
