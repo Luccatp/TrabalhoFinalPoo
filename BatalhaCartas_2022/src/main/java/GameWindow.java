@@ -38,6 +38,8 @@ public class GameWindow extends Application implements Observer {
 		PlacarView placar = new PlacarView();
 		grid.add(placar, 0, 1);
 
+		Button actionButton = new Button("Magic player 1");
+
 		Button butClean = new Button("Clean");
 		grid.add(butClean, 1, 1);
 		butClean.setOnAction(e -> Game.getInstance().removeSelected());
@@ -90,13 +92,23 @@ public class GameWindow extends Application implements Observer {
 					String text = "Fim de Jogo !!\n";
 					if (Game.getInstance().getPtsJ1() > Game.getInstance().getPtsJ2()) {
 						text += "O jogador 1 ganhou !! :-)";
-					} else {
+					} else if (Game.getInstance().getPtsJ2() > Game.getInstance().getPtsJ1()) {
 						text += "O jogador 2 ganhou !! :-)";
+					} else {
+						text += "Deu empate !! :-)";
 					}
 					alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Parabens !!");
 					alert.setHeaderText(null);
 					alert.setContentText(text);
+					alert.showAndWait();
+					break;
+				case TURN:
+					alert = new Alert(AlertType.INFORMATION);
+					String turnText = "agora é o turno do " + eg.getArg();
+					alert.setTitle("De quem é o turno?");
+					alert.setHeaderText(null);
+					alert.setContentText(turnText);
 					alert.showAndWait();
 					break;
 				case REMOVESEL:
