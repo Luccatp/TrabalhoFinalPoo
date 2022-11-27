@@ -20,11 +20,11 @@ public class GameEvent{
         return(action);
     }
     
-    public String getArg(){
-        return(arg);
+        public String getArg(){
+            return(arg);
+        }
+        
+        public String toString(){
+            return target + ":"+ action + ":" + arg;
+        }
     }
-    
-    public String toString(){
-        return target + ":"+ action + ":" + arg;
-    }
-}
