@@ -70,6 +70,42 @@ public class ImageFactory {
 				return ("/imagens/92.png");
 			case "img93":
 				return ("/imagens/93.png");
+			case "img101":
+				return("/imagens/101.png");
+			case "img102":
+				return("/imagens/102.png");
+			case "img103":
+				return("/imagens/103.png");
+			case "img111":
+				return("/imagens/111.png");
+			case "img112":
+				return("/imagens/112.png");
+			case "img113":
+				return("/imagens/113.png");
+			case "img121":
+				return("/imagens/121.png");
+			case "img122":
+				return("/imagens/122.png");
+			case "img123":
+				return("/imagens/123.png");
+			case "img131":
+				return("/imagens/131.png");
+			case "img132":
+				return("/imagens/132.png");
+			case "img133":
+				return("/imagens/133.png");
+			case "img141":
+				return("/imagens/141.png");
+			case "img142":
+				return("/imagens/142.png");
+			case "img143":
+				return("/imagens/143.png");
+			case "img151":
+				return("/imagens/151.png");
+			case "img152":
+				return("/imagens/152.png");
+			case "img153":
+				return("/imagens/153.png");
 			case "imgBck":
 				return ("/imagens/Back.png");
 			default:
