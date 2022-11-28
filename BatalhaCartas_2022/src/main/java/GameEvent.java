@@ -4,7 +4,7 @@ public class GameEvent {
 	};
 
 	public enum Action {
-		INVPLAY, MUSTCLEAN, ENDGAME, REMOVESEL, TURN
+		INVPLAY, MUSTCLEAN, ENDGAME, REMOVESEL, TURN, UNABLEMAGIC
 	};
 
 	private Target target;
