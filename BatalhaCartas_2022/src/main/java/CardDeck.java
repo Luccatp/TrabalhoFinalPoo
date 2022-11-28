@@ -1,5 +1,7 @@
 import java.util.*;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
+
 // Esta classe tem de ser um container de cartas observavel ...
 public class CardDeck extends Observable {
 	public static final int NCARDS = 12;
@@ -12,7 +14,7 @@ public class CardDeck extends Observable {
 		Random r = new Random();
 		Type type;
 		for (int i = 0; i < NCARDS; i++) {
-			int randomType = r.nextInt(9) + 1;
+			int randomType = r.nextInt(15) + 1;
 			int randomHealth = r.nextInt(3) + 1;
 			String teste = "" + randomType + randomHealth;
 			int stringValor = Integer.parseInt(teste);
@@ -127,6 +129,78 @@ public class CardDeck extends Observable {
 					attack = 3;
 					health = 3;
 					break;
+				case 101:
+					attack = 1;
+					health = 1;
+					break;
+				case 102:
+					attack = 1;
+					health = 2;
+					break;
+				case 103:
+				 	attack = 1;
+					health = 3;
+					break;
+				case 111:
+					attack = 2;
+					health = 1;
+					break;
+				case 112:
+					attack = 2;
+					health = 2;
+					break;
+				case 113:
+					attack = 2;
+					health = 3;
+					break;
+				case 121:
+					attack = 3;
+					health = 1;
+					break;
+				case 122:
+				    attack = 3;
+					health = 2;
+					break;
+				case 123:
+					attack = 3;
+					health = 3;
+					break;
+				case 131:
+					attack = 1;
+					health = 1;
+					break;
+				case 132:
+					attack = 1;
+					health = 2;
+					break;
+				case 133:
+				 	attack = 1;
+					health = 3;
+					break;
+				case 141:
+					attack = 2;
+					health = 1;
+					break;
+				case 142:
+					attack = 2;
+					health = 2;
+					break;
+				case 143:
+					attack = 2;
+					health = 3;
+					break;
+				case 151:
+					attack = 3;
+					health = 1;
+					break;
+				case 152:
+				    attack = 3;
+					health = 2;
+					break;
+				case 153:
+					attack = 3;
+					health = 3;
+					break;
 				default:
 					attack = 0;
 					health = 0;
@@ -136,9 +210,14 @@ public class CardDeck extends Observable {
 				type = Type.FIRE;
 			} else if (randomType > 3 && randomType <= 6) {
 				type = Type.PLANT;
-			} else {
+			} else if (randomType > 6 && randomType <= 9) {
 				type = Type.WATER;
+			} else if (randomType > 9 && randomType <= 12) {
+				type = Type.AIR;
+		    } else if (randomType > 12 && randomType <= 15){
+				type = Type.ROCK;
 			}
+			
 			Card c = new Card("C" + randomType, "img" + stringValor, attack, health, type);
 			c.flip();
 			cartas.add(c);

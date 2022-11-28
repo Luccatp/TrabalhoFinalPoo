@@ -4,6 +4,8 @@ enum Type {
 	FIRE,
 	WATER,
 	PLANT,
+	AIR,
+	ROCK,
 
 }
 

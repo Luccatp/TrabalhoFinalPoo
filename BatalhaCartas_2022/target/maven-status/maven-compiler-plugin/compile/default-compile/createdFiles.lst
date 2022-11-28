@@ -1,14 +1,5 @@
-GameEvent.class
-Type.class
-GameWindow.class
-CardDeck.class
-CardView.class
-ImageFactory.class
-CardObserver.class
 GameWindow$1.class
+GameEvent.class
+GameWindow.class
 GameEvent$Action.class
-Card.class
-Game.class
-DeckView.class
-PlacarView.class
 GameEvent$Target.class
