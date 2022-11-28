@@ -138,7 +138,7 @@ public class CardDeck extends Observable {
 					health = 2;
 					break;
 				case 103:
-				 	attack = 1;
+					attack = 1;
 					health = 3;
 					break;
 				case 111:
@@ -158,7 +158,7 @@ public class CardDeck extends Observable {
 					health = 1;
 					break;
 				case 122:
-				    attack = 3;
+					attack = 3;
 					health = 2;
 					break;
 				case 123:
@@ -174,7 +174,7 @@ public class CardDeck extends Observable {
 					health = 2;
 					break;
 				case 133:
-				 	attack = 1;
+					attack = 1;
 					health = 3;
 					break;
 				case 141:
@@ -194,7 +194,7 @@ public class CardDeck extends Observable {
 					health = 1;
 					break;
 				case 152:
-				    attack = 3;
+					attack = 3;
 					health = 2;
 					break;
 				case 153:
@@ -214,10 +214,11 @@ public class CardDeck extends Observable {
 				type = Type.WATER;
 			} else if (randomType > 9 && randomType <= 12) {
 				type = Type.AIR;
-		    } else if (randomType > 12 && randomType <= 15){
+			} else if (randomType > 12 && randomType <= 15) {
 				type = Type.ROCK;
-			}
-			
+			} else
+				type = Type.ROCK;
+
 			Card c = new Card("C" + randomType, "img" + stringValor, attack, health, type);
 			c.flip();
 			cartas.add(c);

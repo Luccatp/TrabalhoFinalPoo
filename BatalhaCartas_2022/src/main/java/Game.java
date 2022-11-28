@@ -22,8 +22,17 @@ public class Game extends Observable {
 
 	private void nextPlayer() {
 		player++;
-		if (player == 4) {
+		GameEvent gameEvent = null;
+		if (player == 2) {
+			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.TURN, Integer.toString(player));
+			setChanged();
+			notifyObservers((Object) gameEvent);
+			deckJ2.flipAll();
+		} else if (player == 4) {
 			player = 1;
+			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.TURN, Integer.toString(player));
+			setChanged();
+			notifyObservers((Object) gameEvent);
 		}
 	}
 
@@ -60,6 +69,7 @@ public class Game extends Observable {
 			} else {
 				// Vira a carta
 				deckJ1.getSelectedCard().flip();
+
 				// Proximo jogador
 				nextPlayer();
 			}
@@ -70,6 +80,7 @@ public class Game extends Observable {
 				notifyObservers((Object) gameEvent);
 			} else {
 				// Vira a carta
+				deckJ2.flipAll();
 				deckJ2.getSelectedCard().flip();
 				// Verifica quem ganhou a rodada
 				if (deckJ1.getSelectedCard().getType().equals(Type.FIRE)
@@ -98,15 +109,7 @@ public class Game extends Observable {
 							.setHealth(0);
 
 					ptsJ2++;
-				}else if(deckJ1.getSelectedCard().getType().equals(Type.AIR) || deckJ1.getSelectedCard().getType().equals(Type.ROCK) || deckJ2.getSelectedCard().getType().equals(Type.AIR) || deckJ2.getSelectedCard().getType().equals(Type.ROCK)){
-
-									deckJ1.getSelectedCard()
-									.setHealth(deckJ1.getSelectedCard().getHealth() - deckJ2.getSelectedCard().getAttack());
-				
-									deckJ2.getSelectedCard()
-									.setHealth(deckJ2.getSelectedCard().getHealth() - deckJ1.getSelectedCard().getAttack());
-									}
-				 else {
+				} else {
 
 					deckJ1.getSelectedCard()
 							.setHealth(deckJ1.getSelectedCard().getHealth() - deckJ2.getSelectedCard().getAttack());
@@ -145,7 +148,7 @@ public class Game extends Observable {
 			return;
 		}
 		jogadas--;
-		if (jogadas == 0) {
+		if (deckJ1.getNumberOfCards() == 1 | deckJ2.getNumberOfCards() == 1) {
 			gameEvent = new GameEvent(GameEvent.Target.GWIN, GameEvent.Action.ENDGAME, "");
 			setChanged();
 			notifyObservers((Object) gameEvent);
@@ -164,12 +167,25 @@ public class Game extends Observable {
 		nextPlayer();
 	}
 
-	public void habilidadeEspecial(){
-		
-		
-		if (deckJ1.getSelectedCard().getHealth() == 1){
-			deckJ1.getSelectedCard().setHealth(3);
+	public void CastMagic1() {
+		for (Card card : deckJ1.getCards()) {
+			if (card.getHealth() == 1) {
+				card.setHealth(3);
+				String imgName1 = card.getImageId();
+				imgName1 = imgName1.substring(0, imgName1.length() - 1) + card.getHealth();
+				card.setImagem(imgName1);
+			}
 		}
-		nextPlayer();
+	}
+
+	public void CastMagic2() {
+		for (Card card : deckJ2.getCards()) {
+			if (card.getHealth() == 1) {
+				card.setHealth(3);
+				String imgName1 = card.getImageId();
+				imgName1 = imgName1.substring(0, imgName1.length() - 1) + card.getHealth();
+				card.setImagem(imgName1);
+			}
+		}
 	}
 }

@@ -38,7 +38,13 @@ public class GameWindow extends Application implements Observer {
 		PlacarView placar = new PlacarView();
 		grid.add(placar, 0, 1);
 
-		Button actionButton = new Button("Magic player 1");
+		Button actionButton1 = new Button("Magic player 1");
+		grid.add(actionButton1, 1, 2);
+		actionButton1.setOnAction(e -> Game.getInstance().CastMagic1());
+
+		Button actionButton2 = new Button("Magic player 2");
+		grid.add(actionButton2, 1, 0);
+		actionButton2.setOnAction(e -> Game.getInstance().CastMagic2());
 
 		Button butClean = new Button("Clean");
 		grid.add(butClean, 1, 1);
@@ -111,6 +117,14 @@ public class GameWindow extends Application implements Observer {
 					alert.setContentText(turnText);
 					alert.showAndWait();
 					break;
+
+				case UNABLEMAGIC:
+					alert = new Alert(AlertType.INFORMATION);
+					String magicText = "agora é o turno do " + eg.getArg();
+					alert.setTitle("De quem é o turno?");
+					alert.setHeaderText(null);
+					alert.setContentText(magicText);
+					alert.showAndWait();
 				case REMOVESEL:
 					// Esse evento não vem para cá
 			}
